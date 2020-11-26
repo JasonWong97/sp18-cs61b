@@ -24,23 +24,23 @@ public class Planet {
         imgFileName = img;
     }
 
-    public Planet(Planet b) {
-        xxPos = b.xxPos;
-        yyPos = b.yyPos;
-        xxVel = b.xxVel;
-        yyVel = b.yyVel;
-        mass = b.mass;
-        imgFileName = b.imgFileName;
+    public Planet(Planet planet) {
+        xxPos = planet.xxPos;
+        yyPos = planet.yyPos;
+        xxVel = planet.xxVel;
+        yyVel = planet.yyVel;
+        mass = planet.mass;
+        imgFileName = planet.imgFileName;
     }
 
-    public double calcDistance(Planet b) {
-        return Math.sqrt((this.xxPos - b.xxPos) * (this.xxPos - b.xxPos) +
-                (this.yyPos - b.yyPos) * (this.yyPos - b.yyPos));
+    public double calcDistance(Planet planet) {
+        return Math.sqrt((this.xxPos - planet.xxPos) * (this.xxPos - planet.xxPos) +
+                (this.yyPos - planet.yyPos) * (this.yyPos - planet.yyPos));
 
     }
 
-    public double calcForceExertedBy(Planet b) {
-        return G * mass * b.mass / Math.pow(calcDistance(b), 2);
+    public double calcForceExertedBy(Planet planet) {
+        return G * mass * planet.mass / Math.pow(calcDistance(planet), 2);
     }
 
     public double calcForceExertedByX(Planet b) {
