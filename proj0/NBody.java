@@ -49,7 +49,7 @@ public class NBody {
             }
         }
 
-        Planet[] bodies = new Planet[i];
+        Planet[] planets = new Planet[i];
 //        ArrayList<Planet> bodyArrayList = new ArrayList<Planet>();
         double xxPos;
         double yyPos;
@@ -64,10 +64,10 @@ public class NBody {
             yyVel = in.readDouble();
             mass = in.readDouble();
             imgFileName = in.readString();
-            bodies[j] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
+            planets[j] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
 //            bodyArrayList.add(new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName));
         }
-        return bodies;
+        return planets;
 
     }
 
@@ -76,13 +76,13 @@ public class NBody {
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
         double radius = readRadius(filename);
-        Planet[] bodies = readPlanets(filename);
+        Planet[] planets = readPlanets(filename);
 
-        int count_bodies = bodies.length;
+        int count_planets = planets.length;
 
 //        double t=0;
-        double[] xForces = new double[count_bodies];
-        double[] yForces = new double[count_bodies];
+        double[] xForces = new double[count_planets];
+        double[] yForces = new double[count_planets];
 
         StdDraw.enableDoubleBuffering();
 
@@ -93,14 +93,14 @@ public class NBody {
 
 //            calculate the xForeces and yForeces arryas
             int ii = 0;
-            for (Planet p : bodies) {
-                xForces[ii] = p.calcNetForceExertedByX(bodies);
-                yForces[ii] = p.calcNetForceExertedByY(bodies);
+            for (Planet p : planets) {
+                xForces[ii] = p.calcNetForceExertedByX(planets);
+                yForces[ii] = p.calcNetForceExertedByY(planets);
                 ii++;
             }
 
             ii = 0;
-            for (Planet p : bodies) {
+            for (Planet p : planets) {
                 p.update(dt, xForces[ii], yForces[ii]);
                 ii++;
             }
@@ -108,8 +108,8 @@ public class NBody {
 
             StdDraw.picture(0, 0, "images/starfield.jpg");
 
-//            draw bodies
-            for (Planet p : bodies) {
+//            draw planets
+            for (Planet p : planets) {
                 p.draw();
             }
 
@@ -118,12 +118,12 @@ public class NBody {
             t += dt;
         }
 
-        StdOut.printf("%d\n", bodies.length);
+        StdOut.printf("%d\n", planets.length);
         StdOut.printf("%.2e\n", radius);
-        for (int i = 0; i < bodies.length; i++) {
+        for (int i = 0; i < planets.length; i++) {
             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                    bodies[i].xxPos, bodies[i].yyPos, bodies[i].xxVel,
-                    bodies[i].yyVel, bodies[i].mass, bodies[i].imgFileName);
+                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
         }
 
 
