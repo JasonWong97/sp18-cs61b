@@ -10,20 +10,22 @@ public class NBody {
         In in = new In(path);
         double d;
 
-        while (!in.isEmpty()) {
-            try {
-                in.readInt();
-            } catch (Exception e) {
-                try {
-                    d = in.readDouble();
-                    return d;
-                } catch (Exception e1) {
-                    System.out.println("Please enter double. ");
-                }
-                System.out.println("Please enter double. ");
-            }
-        }
-        return 0;
+//        while (!in.isEmpty()) {
+//            try {
+//                in.readInt();
+//            } catch (Exception e) {
+//                try {
+//                    d = in.readDouble();
+//                    return d;
+//                } catch (Exception e1) {
+//                    System.out.println("Please enter double. ");
+//                }
+//                System.out.println("Please enter double. ");
+//            }
+//        }
+        in.readInt();
+        d = in.readDouble();
+        return d;
     }
 
     public static Planet[] readPlanets(String path) {
@@ -35,20 +37,23 @@ public class NBody {
         double d;
         int i = 0;
 
-        while (!in.isEmpty()) {
-            try {
-                i = in.readInt();
-            } catch (Exception e) {
-                try {
-                    d = in.readDouble();
-                    break;
-                } catch (Exception e1) {
-                    System.out.println("Please enter double. ");
-                }
-                System.out.println("Please enter double. ");
-            }
-        }
+//        while (!in.isEmpty()) {
+//            try {
+//                i = in.readInt();
+//            } catch (Exception e) {
+//                try {
+//                    d = in.readDouble();
+//                    break;
+//                } catch (Exception e1) {
+//                    System.out.println("Please enter double. ");
+//                }
+//                System.out.println("Please enter double. ");
+//            }
+//        }
+//
 
+        i = in.readInt();
+        d = in.readDouble();
         Planet[] planets = new Planet[i];
 //        ArrayList<Planet> bodyArrayList = new ArrayList<Planet>();
         double xxPos;
