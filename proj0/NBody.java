@@ -26,7 +26,7 @@ public class NBody {
         return 0;
     }
 
-    public static Body[] readBodies(String path) {
+    public static Planet[] readBodies(String path) {
         if (path.length() == 0) {
             System.out.println("Please supply a country as a command line argument.");
             System.out.println("For countries with spaces, use an underscore, e.g. South_Korea");
@@ -49,8 +49,8 @@ public class NBody {
             }
         }
 
-        Body[] bodies = new Body[i];
-//        ArrayList<Body> bodyArrayList = new ArrayList<Body>();
+        Planet[] bodies = new Planet[i];
+//        ArrayList<Planet> bodyArrayList = new ArrayList<Planet>();
         double xxPos;
         double yyPos;
         double xxVel;
@@ -64,8 +64,8 @@ public class NBody {
             yyVel = in.readDouble();
             mass = in.readDouble();
             imgFileName = in.readString();
-            bodies[j] = new Body(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
-//            bodyArrayList.add(new Body(xxPos, yyPos, xxVel, yyVel, mass, imgFileName));
+            bodies[j] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
+//            bodyArrayList.add(new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName));
         }
         return bodies;
 
@@ -76,7 +76,7 @@ public class NBody {
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
         double radius = readRadius(filename);
-        Body[] bodies = readBodies(filename);
+        Planet[] bodies = readBodies(filename);
 
         int count_bodies = bodies.length;
 
@@ -93,15 +93,15 @@ public class NBody {
 
 //            calculate the xForeces and yForeces arryas
             int ii = 0;
-            for (Body body : bodies) {
-                xForces[ii] = body.calcNetForceExertedByX(bodies);
-                yForces[ii] = body.calcNetForceExertedByY(bodies);
+            for (Planet p : bodies) {
+                xForces[ii] = p.calcNetForceExertedByX(bodies);
+                yForces[ii] = p.calcNetForceExertedByY(bodies);
                 ii++;
             }
 
             ii = 0;
-            for (Body body : bodies) {
-                body.update(dt, xForces[ii], yForces[ii]);
+            for (Planet p : bodies) {
+                p.update(dt, xForces[ii], yForces[ii]);
                 ii++;
             }
 
@@ -109,8 +109,8 @@ public class NBody {
             StdDraw.picture(0, 0, "images/starfield.jpg");
 
 //            draw bodies
-            for (Body body : bodies) {
-                body.draw();
+            for (Planet p : bodies) {
+                p.draw();
             }
 
             StdDraw.show();
