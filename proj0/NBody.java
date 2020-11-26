@@ -26,7 +26,7 @@ public class NBody {
         return 0;
     }
 
-    public static Planet[] readBodies(String path) {
+    public static Planet[] readPlanets(String path) {
         if (path.length() == 0) {
             System.out.println("Please supply a country as a command line argument.");
             System.out.println("For countries with spaces, use an underscore, e.g. South_Korea");
