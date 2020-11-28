@@ -89,13 +89,24 @@ public class NBody {
         double[] xForces = new double[count_planets];
         double[] yForces = new double[count_planets];
 
+
         StdDraw.enableDoubleBuffering();
+//
+//        class MyThread extends Thread {
+//            @Override
+//            public void run() {
+//                super.run();
+//                StdAudio.play("audio/2001.mid");
+//            }
+//        }
+//
+//        MyThread myThread = new MyThread();
+//        myThread.start();
+
 
         for (int t = 0; t < T; t++) {
             StdDraw.setScale(-radius, radius);
             StdDraw.clear();
-
-
 //            calculate the xForeces and yForeces arryas
             int ii = 0;
             for (Planet p : planets) {
@@ -122,6 +133,8 @@ public class NBody {
             StdDraw.pause(10);
             t += dt;
         }
+
+        StdAudio.close();
 
         StdOut.printf("%d\n", planets.length);
         StdOut.printf("%.2e\n", radius);
