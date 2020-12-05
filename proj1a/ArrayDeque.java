@@ -99,8 +99,14 @@ public class ArrayDeque<T> {
      */
     public void addLast(T item) {
         checkSize();
-        lastIndex += 1;
-        a[lastIndex] = item;
+        if (lastIndex == 0) {
+            a[lastIndex] = item;
+        } else {
+            lastIndex += 1;
+            a[lastIndex] = item;
+        }
+
+
         ++size;
     }
 
@@ -143,12 +149,13 @@ public class ArrayDeque<T> {
         T temp;
         temp = a[firstIndex];
         if (firstIndex == a.length - 1) {
+            a[firstIndex] = null;
             firstIndex = 0;
         } else {
+//            gc
+            a[firstIndex] = null;
             firstIndex += 1;
         }
-
-
         --size;
         checkSize();
         return temp;
@@ -162,6 +169,9 @@ public class ArrayDeque<T> {
      */
     public T removeLast() {
         T temp;
+        if (lastIndex == 0) {
+            lastIndex = a.length - 1;
+        }
         temp = a[lastIndex];
         lastIndex -= 1;
         --size;
