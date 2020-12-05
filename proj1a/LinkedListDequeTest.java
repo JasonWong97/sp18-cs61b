@@ -39,7 +39,7 @@ public class LinkedListDequeTest {
      */
     public static void addIsEmptySizeTest() {
         System.out.println("Running add/isEmpty/Size test.");
-        System.out.println("" +
+        System.out.println(
                 "Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
@@ -52,7 +52,7 @@ public class LinkedListDequeTest {
         // It's a binary operator that returns true if both arguments true, and false otherwise.
         passed = checkSize(1, lld1.size()) && passed;
         System.out.println(lld1.size());
-//		System.exit(0);
+
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 //
         System.out.println(passed);
@@ -89,7 +89,7 @@ public class LinkedListDequeTest {
 
         System.out.println("Running add/remove test.");
 
-        System.out.println("" +
+        System.out.println(
                 "Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
@@ -113,4 +113,4 @@ public class LinkedListDequeTest {
         addIsEmptySizeTest();
         addRemoveTest();
     }
-} 
+}
