@@ -54,8 +54,6 @@ public class LinkedListDequeTest {
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 //
         System.out.println(passed);
-//		System.exit(0);
-
 
         lld1.addLast("middle");
         passed = checkSize(2, lld1.size()) && passed;

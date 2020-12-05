@@ -9,50 +9,11 @@ public class ArrayDeque<T> {
 
     private T[] a;
     private int size;
-    private int firstIndex;
-    private int lastIndex;
+    private int nextFirst;
+    private int nextLast;
     private static final int FACTOR_EXPAND = 2;
     private static final double FACTOR_USAGE = 0.25;
 
-
-    private void checkSize() {
-        int emptySpace = 0;
-        boolean aType = false;
-        if (lastIndex > firstIndex) {
-            emptySpace = a.length - (lastIndex - firstIndex + 1);
-            aType = true;
-        } else {
-            emptySpace = firstIndex - lastIndex - 1;
-        }
-        if (emptySpace == 0) {
-            T[] tt = (T[]) new Object[a.length * FACTOR_EXPAND];
-            if (aType) {
-                System.arraycopy(a, firstIndex, tt, 0, lastIndex - firstIndex + 1);
-                lastIndex = lastIndex - firstIndex;
-                firstIndex = 0;
-            } else {
-                System.arraycopy(a, firstIndex, tt, 0, a.length - firstIndex);
-                System.arraycopy(a, 0, tt, a.length - firstIndex, lastIndex + 1);
-                lastIndex = lastIndex + a.length - firstIndex;
-                firstIndex = 0;
-            }
-            a = tt;
-        }
-        if (emptySpace > a.length * (1 - FACTOR_USAGE)) {
-            T[] tt = (T[]) new Object[a.length * FACTOR_EXPAND / 4];
-            if (aType) {
-                System.arraycopy(a, firstIndex, tt, 0, lastIndex - firstIndex + 1);
-                lastIndex = lastIndex - firstIndex;
-                firstIndex = 0;
-            } else {
-                System.arraycopy(a, firstIndex, tt, 0, a.length - firstIndex);
-                System.arraycopy(a, 0, tt, a.length - firstIndex, lastIndex + 1);
-                lastIndex = lastIndex + a.length - firstIndex;
-                firstIndex = 0;
-            }
-            a = tt;
-        }
-    }
 
     /**
      * Creates an empty linked list deque.
@@ -60,6 +21,8 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         a = (T[]) new Object[8];
         size = 0;
+        nextFirst = a.length / 2;
+        nextLast = a.length / 2 + 1;
     }
 
     /**
@@ -81,15 +44,12 @@ public class ArrayDeque<T> {
      * @param item
      */
     public void addFirst(T item) {
-        checkSize();
-        if (firstIndex == 0) {
-            firstIndex = a.length - 1;
-
-        } else {
-            firstIndex -= 1;
-        }
-        a[firstIndex] = item;
+        a[nextFirst] = item;
         ++size;
+        nextFirst = minusOne(nextFirst);
+        if (size == a.length) {
+            resize(true);
+        }
     }
 
     /**
@@ -98,16 +58,12 @@ public class ArrayDeque<T> {
      * @param item
      */
     public void addLast(T item) {
-        checkSize();
-        if (lastIndex == 0) {
-            a[lastIndex] = item;
-        } else {
-            lastIndex += 1;
-            a[lastIndex] = item;
-        }
-
-
+        a[nextLast] = item;
         ++size;
+        nextLast = plusOne(nextLast);
+        if (size == a.length) {
+            resize(true);
+        }
     }
 
     /**
@@ -146,18 +102,13 @@ public class ArrayDeque<T> {
      * @param
      */
     public T removeFirst() {
-        T temp;
-        temp = a[firstIndex];
-        if (firstIndex == a.length - 1) {
-            a[firstIndex] = null;
-            firstIndex = 0;
-        } else {
-//            gc
-            a[firstIndex] = null;
-            firstIndex += 1;
-        }
+        nextFirst = plusOne(nextFirst);
+        T temp = a[nextFirst];
+        a[nextFirst] = null;
         --size;
-        checkSize();
+        if ((size < FACTOR_USAGE * a.length) && a.length >= 16) {
+            resize(false);
+        }
         return temp;
     }
 
@@ -168,14 +119,13 @@ public class ArrayDeque<T> {
      * @param
      */
     public T removeLast() {
-        T temp;
-        if (lastIndex == 0) {
-            lastIndex = a.length - 1;
-        }
-        temp = a[lastIndex];
-        lastIndex -= 1;
+        nextLast = minusOne(nextLast);
+        T temp = a[nextLast];
+        a[nextLast] = null;
         --size;
-        checkSize();
+        if ((size < FACTOR_USAGE * a.length) && a.length >= 16) {
+            resize(false);
+        }
         return temp;
     }
 
@@ -186,17 +136,40 @@ public class ArrayDeque<T> {
      * @param index
      */
     public T get(int index) {
-        if (index < 0 || index > size) {
+        if (size == 0) {
             return null;
         }
-        if (firstIndex < lastIndex) {
-            return a[firstIndex + index];
+        return a[(index + plusOne(nextFirst)) % a.length];
+    }
+
+    private int minusOne(int index) {
+        if (index == 0) {
+            return a.length - 1;
         } else {
-            if (index < a.length - firstIndex) {
-                return a[firstIndex + index];
-            } else {
-                return a[index - (a.length - firstIndex)];
-            }
+            return index - 1;
         }
+    }
+
+    private int plusOne(int index) {
+        return (index + 1) % a.length;
+    }
+
+    private void resize(boolean ExpandOrReduce) {
+        T[] tt;
+        if (ExpandOrReduce) {
+            tt = (T[]) new Object[a.length * FACTOR_EXPAND];
+        } else {
+            tt = (T[]) new Object[a.length * FACTOR_EXPAND / 4];
+        }
+        int i = 0;
+        int lastIndex = minusOne(nextLast);
+        for (int j = plusOne(nextFirst); j != lastIndex; j = plusOne(j)) {
+            tt[i] = a[j];
+            i = plusOne(i);
+        }
+        tt[i] = a[lastIndex];
+        a = tt;
+        nextFirst = a.length - 1;
+        nextLast = i + 1;
     }
 }
