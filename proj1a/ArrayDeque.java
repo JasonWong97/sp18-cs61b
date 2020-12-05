@@ -81,6 +81,9 @@ public class ArrayDeque<T> {
      * @param
      */
     public int size() {
+        if (size < 0) {
+            return 0;
+        }
         return size;
     }
 
