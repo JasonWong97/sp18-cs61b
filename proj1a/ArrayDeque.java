@@ -67,9 +67,10 @@ public class ArrayDeque<T> {
      *
      * @param other
      */
-    public ArrayDeque(ArrayDeque other) {
-
-    }
+//    public ArrayDeque(ArrayDeque other) {
+//
+//    }
+//
 
 
     /**

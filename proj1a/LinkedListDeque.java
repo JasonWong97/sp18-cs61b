@@ -33,14 +33,14 @@ public class LinkedListDeque<T> {
      *
      * @param other
      */
-    public LinkedListDeque(LinkedListDeque other) {
-        LinkedListDeque t = new LinkedListDeque();
-        ListNode node = other.sentinel.next;
-        while (node != other.sentinel) {
-            node = node.next;
-            t.addLast(node.item);
-        }
-    }
+//    public LinkedListDeque(LinkedListDeque other) {
+//        LinkedListDeque t = new LinkedListDeque();
+//        ListNode node = other.sentinel.next;
+//        while (node != other.sentinel) {
+//            node = node.next;
+//            t.addLast(node.item);
+//        }
+//    }
 
     /**
      * Adds an item of type T to the front of the deque.
