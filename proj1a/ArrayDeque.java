@@ -154,9 +154,9 @@ public class ArrayDeque<T> {
         return (index + 1) % a.length;
     }
 
-    private void resize(boolean ExpandOrReduce) {
+    private void resize(boolean expandOrReduce) {
         T[] tt;
-        if (ExpandOrReduce) {
+        if (expandOrReduce) {
             tt = (T[]) new Object[a.length * FACTOR_EXPAND];
         } else {
             tt = (T[]) new Object[a.length * FACTOR_EXPAND / 4];

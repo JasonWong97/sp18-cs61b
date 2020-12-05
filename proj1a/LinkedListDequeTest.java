@@ -60,19 +60,16 @@ public class LinkedListDequeTest {
 
 
         System.out.println(passed);
-//		System.exit(0);
 
         lld1.addLast("back");
         passed = checkSize(3, lld1.size()) && passed;
 
         System.out.println(passed);
-//		System.exit(0);
 
         System.out.println("Printing out deque: ");
         lld1.printDeque();
 
         System.out.println(passed);
-//		System.exit(0);
 
         printTestStatus(passed);
 
