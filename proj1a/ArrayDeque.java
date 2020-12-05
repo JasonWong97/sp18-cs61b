@@ -89,7 +89,6 @@ public class ArrayDeque<T> {
 
     /**
      * Prints the items in the deque from first to last, separated by a space.
-     *
      * @param
      */
     public void printDeque() {
