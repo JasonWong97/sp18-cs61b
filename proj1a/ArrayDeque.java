@@ -175,7 +175,9 @@ public class ArrayDeque<T> {
      * @param index
      */
     public T get(int index) {
-        if (index < 0 || index > size) return null;
+        if (index < 0 || index > size) {
+            return null;
+        }
         if (firstIndex < lastIndex) {
             return a[firstIndex + index];
         } else {
