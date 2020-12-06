@@ -9,39 +9,37 @@ public class TestPalindrome {
 
     @Test
     public void testWordToDeque() {
-        Deque<Character> d = palindrome.wordToDeque("persiflage");
+        Deque d = palindrome.wordToDeque("persiflage");
         String actual = "";
         for (int i = 0; i < "persiflage".length(); i++) {
             actual += d.removeFirst();
         }
         assertEquals("persiflage", actual);
-    }
-
+    } // Uncomment this class once you've created your Palindrome class.
 
     @Test
     public void testIsPalindrome() {
-
-        assertTrue(palindrome.isPalindrome("a"));
-        assertTrue(palindrome.isPalindrome("racecar"));
-        assertTrue(palindrome.isPalindrome("noon"));
-
+        assertTrue(palindrome.isPalindrome("ioi"));
         assertFalse(palindrome.isPalindrome("cat"));
-        assertFalse(palindrome.isPalindrome("horse"));
-        assertFalse(palindrome.isPalindrome("rancor"));
-        assertFalse(palindrome.isPalindrome("aaaaab"));
+        assertTrue(palindrome.isPalindrome(""));
+        assertTrue(palindrome.isPalindrome("&"));
+    }
 
-        System.out.println("OffByOne");
-        OffByOne obo = new OffByOne();
-        assertTrue(palindrome.isPalindrome("&%", obo));
-        assertTrue(palindrome.isPalindrome("flake", obo));
-        assertFalse(palindrome.isPalindrome("abc", obo));
-        assertTrue(palindrome.isPalindrome("abb", obo));
+    @Test
+    public void testPalindrome() {
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("flake", offByOne));
+        assertFalse(palindrome.isPalindrome("aaabbbaaa", offByOne));
+        assertTrue(palindrome.isPalindrome("", offByOne));
+        assertTrue(palindrome.isPalindrome("&", offByOne));
+    }
 
-        System.out.println("OffByN");
-        OffByN offBy5 = new OffByN(2);
-        assertTrue(palindrome.isPalindrome("&%", offBy5));
-        assertTrue(palindrome.isPalindrome("flake", offBy5));
-        assertFalse(palindrome.isPalindrome("abc", offBy5));
-        assertTrue(palindrome.isPalindrome("abb", offBy5));
+    @Test
+    public void testPalindromeByN() {
+        OffByN offByN = new OffByN(6);
+        assertTrue(palindrome.isPalindrome("gmdjgm", offByN));
+        assertFalse(palindrome.isPalindrome("aaabbbaa", offByN));
+        assertTrue(palindrome.isPalindrome("", offByN));
+        assertTrue(palindrome.isPalindrome("&", offByN));
     }
 }
