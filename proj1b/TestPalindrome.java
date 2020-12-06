@@ -43,3 +43,4 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("&", offByN));
     }
 }
+
