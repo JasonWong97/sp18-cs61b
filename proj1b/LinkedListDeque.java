@@ -5,7 +5,8 @@
  * @Date 11/30/20 1:52 下午
  * @Version V1.0
  **/
-public class LinkedListDeque<T> implements Deque<T>{
+
+public class LinkedListDeque<T> implements Deque<T> {
 
     private class ListNode {
         T item;
