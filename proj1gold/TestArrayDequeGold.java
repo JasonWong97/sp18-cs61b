@@ -25,9 +25,9 @@ public class TestArrayDequeGold {
         for (int i = 0; i < 10; i += 1) {
             Integer actual = ads.removeLast();
             Integer expected = sad.removeLast();
-            System.out.print("addFirst(" + actual + ")\n");
-            System.out.print("addFirst(" + expected + ")\n");
-            assertEquals("removeLast()\n", actual, expected);
+            assertEquals("addLast(" + actual + ")\n"
+                    +"addLast(" + expected + ")\n"
+                    +"removeLast()\n", actual, expected);
         }
 
 
@@ -40,9 +40,9 @@ public class TestArrayDequeGold {
         for (int i = 0; i < 10; i += 1) {
             Integer actual = ads.removeFirst();
             Integer expected = sad.removeFirst();
-            System.out.print("addFirst(" + actual + ")\n");
-            System.out.print("addFirst(" + expected + ")\n");
-            assertEquals("removeFirst()\n", actual, expected);
+            assertEquals("addFirst(" + actual + ")\n"
+                    +"addFirst(" + expected + ")\n"
+                    +"removeFirst()\n", actual, expected);
         }
 
     }
