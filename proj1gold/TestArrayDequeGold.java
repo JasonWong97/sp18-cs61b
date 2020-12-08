@@ -23,11 +23,11 @@ public class TestArrayDequeGold {
             ads.addLast(num);
         }
         for (int i = 0; i < 10; i += 1) {
-            Integer actual =ads.removeLast();
-            Integer expected =sad.removeLast();
-            System.out.println("addFirst("+actual+")\n");
-            System.out.println("addFirst("+expected+")\n");
-//            assertEquals("removeLast()\n",actual,expected);
+            Integer actual = ads.removeLast();
+            Integer expected = sad.removeLast();
+            System.out.print("addFirst(" + actual + ")\n");
+            System.out.print("addFirst(" + expected + ")\n");
+            assertEquals("removeLast()\n", actual, expected);
         }
 
 
@@ -38,11 +38,11 @@ public class TestArrayDequeGold {
             ads.addFirst(num);
         }
         for (int i = 0; i < 10; i += 1) {
-            Integer actual =ads.removeFirst();
-            Integer expected =sad.removeFirst();
-            System.out.println("addFirst("+actual+")\n");
-            System.out.println("addFirst("+expected+")\n");
-            assertEquals("removeFirst()\n",actual,expected);
+            Integer actual = ads.removeFirst();
+            Integer expected = sad.removeFirst();
+            System.out.print("addFirst(" + actual + ")\n");
+            System.out.print("addFirst(" + expected + ")\n");
+            assertEquals("removeFirst()\n", actual, expected);
         }
 
     }
